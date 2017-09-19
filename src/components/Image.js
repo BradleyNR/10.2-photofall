@@ -8,11 +8,11 @@ class ImageList extends React.Component{
     let caption = this.props.post.caption;
     let uniqueId = this.props.uniqueId;
     return (
-      <li>
+      <div className="photo-block">
         <img className="images" src={photos} alt='Did Not Load'/>
         <p>{caption}</p>
         <a onClick={this.props.removePost.bind(this, uniqueId)} className='btn btn-danger'>Delete</a>
-      </li>
+      </div>
     );
   }
 }
@@ -23,7 +23,8 @@ class ImageForm extends React.Component{
     super();
     this.state = {
       imgURL: '',
-      caption: ''
+      caption: '',
+      formClass: 'well form-header-movement form-header-styling'
     }
   }
   //handles URL field state
@@ -42,32 +43,47 @@ class ImageForm extends React.Component{
     this.setState({imgURL: '', caption: ''});
   }
 
+  popOut = (e) => {
+    e.preventDefault();
+    this.setState({formClass: 'well form-header-styling'});
+  }
+
+  popIn = (e) => {
+    e.preventDefault();
+    this.setState({formClass: 'well form-header-movement form-header-styling'});
+  }
+
   render(){
     // ------ Below, the value on inputs will clear the field when submitted ------
     return(
-      <form onSubmit={this.submitPost} className="form-horizontal">
+      <div onMouseEnter={this.popOut} onMouseLeave={this.popIn} className={this.state.formClass}>
+        <form onSubmit={this.submitPost} className="form-horizontal">
 
-        <div className="form-group">
-          <label className="control-label col-sm-3" htmlFor="imageUrl">Image URL:</label>
-          <div className="col-sm-7">
-            <input onChange={this.handleUrlChange} type="text" className="form-control" id="imageUrl" value={this.state.imgURL} placeholder="Image URL" />
+          <div className="form-group">
+            <label className="control-label col-sm-3" htmlFor="imageUrl">Image URL:</label>
+            <div className="col-sm-7">
+              <input onChange={this.handleUrlChange} type="text" className="form-control" id="imageUrl" value={this.state.imgURL} placeholder="Image URL" />
+            </div>
           </div>
-        </div>
 
-        <div className="form-group">
-          <label className="control-label col-sm-3" htmlFor="caption">Caption:</label>
-          <div className="col-sm-7">
-            <input onChange={this.handleCaptionChange} type="text" className="form-control" id="caption" value={this.state.caption} placeholder="Caption" />
+          <div className="form-group">
+            <label className="control-label col-sm-3" htmlFor="caption">Caption:</label>
+            <div className="col-sm-7">
+              <input onChange={this.handleCaptionChange} type="text" className="form-control" id="caption" value={this.state.caption} placeholder="Caption" />
+            </div>
           </div>
-        </div>
 
-        <div className="form-group">
-          <div className="col-sm-offset-9 col-sm-1">
-            <button type="submit" className="btn btn-primary">Submit</button>
+          <div className="form-group">
+            <div className="col-sm-offset-9 col-sm-1">
+              <button type="submit" className="btn btn-primary">Submit</button>
+            </div>
           </div>
-        </div>
 
-      </form>
+        </form>
+        <div className="row">
+          <div className="form-bottom-element">Add an Image</div>
+        </div>
+      </div>
     );
   }
 }
@@ -124,14 +140,15 @@ class ImageBoard extends React.Component{
     return(
       <div>
 
-        <div className='well'>
-          <ImageForm addPost={this.addPost} />
-        </div>
 
-        <div className='well'>
-          <ul className="list">
+        <ImageForm addPost={this.addPost} />
+
+
+        <div className='well main-content'>
+          <h1 className="main-title">PhotoFall</h1>
+          <div className="list">
             {posts}
-          </ul>
+          </div>
         </div>
 
       </div>
