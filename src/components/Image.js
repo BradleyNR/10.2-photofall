@@ -10,7 +10,7 @@ class ImageList extends React.Component{
     return (
       <div className="photo-block">
         <img className="images" src={photos} alt='Did Not Load'/>
-        <p>{caption}</p>
+        <p className="photo-caption">{caption}</p>
         <a onClick={this.props.removePost.bind(this, uniqueId)} className='btn btn-danger'>Delete</a>
       </div>
     );
@@ -81,7 +81,7 @@ class ImageForm extends React.Component{
 
         </form>
         <div className="row">
-          <div className="form-bottom-element">Add an Image</div>
+          <div className="form-bottom-element">New Image</div>
         </div>
       </div>
     );
