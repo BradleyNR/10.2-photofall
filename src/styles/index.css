@@ -1,14 +1,15 @@
 @keyframes scroll{
   100%{
-    background-position:0px -3000px;
+    background-position:0px -1000px;
   }
 }
 
+/*Animation below causing input lag, will research later*/
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
   /*position: fixed;*/
   background: linear-gradient( rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8) ), url('../images/bg_image.jpg');
-  animation: 100s scroll infinite linear;
+  /*animation: 120s scroll infinite linear;*/
 }
