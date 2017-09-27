@@ -238,7 +238,7 @@ class ImageBoard extends React.Component{
 
     // --- Maps over post array (in state), creates multiple ImageList with correct post
     let posts = this.state.post.map((post, index) => {
-      return <ImageList key={post.imgURL} post={post} removePost={this.removePost} editPost={this.editPost} uniqueId={post._id}/>;
+      return <ImageList key={post._id} post={post} removePost={this.removePost} editPost={this.editPost} uniqueId={post._id}/>;
     });
 
     return(
